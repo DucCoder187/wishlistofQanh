@@ -3,71 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Những thứ yêu thích của Quế Anh</title>
+    <title>Những thứ yêu thích của Quế Anh 💖</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
-            --primary-color: #ff7eb3;
-            --secondary-color: #7afcff;
+            --primary-color: #ff7eb9;
+            --secondary-color: #a6e3ff;
             --accent-color: #ff65a3;
             --light-color: #fff9f9;
-            --shadow-color: rgba(255, 126, 179, 0.2);
+            --shadow-color: rgba(255, 126, 185, 0.2);
+            --heart-color: #ff4081;
+            --windows-blue: #0078d7;
+            --ios-purple: #af52de;
+            --pastel-pink: #ffcfe5;
+            --pastel-blue: #c6e2ff;
+            --pastel-yellow: #fffacd;
+            --pastel-green: #d4ffd4;
         }
         
         body {
-            background: linear-gradient(135deg, #fff9f9 0%, #ffe6f2 100%);
+            background: linear-gradient(135deg, #fff9f9 0%, #ffe6f2 50%, #e6f7ff 100%);
             min-height: 100vh;
             padding: 20px;
             color: #555;
+            position: relative;
+            overflow-x: hidden;
         }
         
+        /* Hiệu ứng nền */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--heart-color);
+            opacity: 0.3;
+            animation: floatHeart 15s linear infinite;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Container chính */
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
+        /* Header */
         .header {
             text-align: center;
             margin-bottom: 40px;
             padding: 20px;
             animation: fadeInDown 1s ease;
+            position: relative;
         }
         
         .header h1 {
             color: var(--accent-color);
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 0px var(--shadow-color);
+            text-shadow: 3px 3px 0px rgba(255, 101, 163, 0.1);
             position: relative;
             display: inline-block;
+            font-family: 'Dancing Script', cursive;
         }
         
         .header h1:after {
             content: '';
             position: absolute;
             width: 100%;
-            height: 10px;
-            background-color: var(--secondary-color);
+            height: 12px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
             bottom: 5px;
             left: 0;
             z-index: -1;
-            opacity: 0.7;
+            opacity: 0.6;
+            border-radius: 6px;
         }
         
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #888;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin: 0 auto 15px;
+            line-height: 1.6;
         }
         
+        /* Badge hệ điều hành */
+        .os-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .os-badge {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .os-badge:hover {
+            transform: translateY(-3px);
+        }
+        
+        .windows-badge {
+            border-left: 4px solid var(--windows-blue);
+            color: var(--windows-blue);
+        }
+        
+        .ios-badge {
+            border-left: 4px solid var(--ios-purple);
+            color: var(--ios-purple);
+        }
+        
+        /* Khu vực ranking */
         .ranking-container {
             display: flex;
             justify-content: center;
@@ -81,58 +173,74 @@
         
         .top-item {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 25px;
+            padding: 30px 25px;
+            box-shadow: 0 15px 35px var(--shadow-color);
             text-align: center;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            border: 5px solid transparent;
+            border: 6px solid transparent;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .top-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
         
         .top-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 101, 163, 0.25);
         }
         
         .top-1 {
-            width: 320px;
+            width: 340px;
             order: 2;
             border-color: gold;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
             z-index: 3;
+            background: linear-gradient(145deg, #ffffff, #fff9f9);
         }
         
         .top-1 .rank-badge {
             background: linear-gradient(45deg, gold, #ffd700);
             color: #8a6d00;
             font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
         }
         
         .top-2 {
-            width: 280px;
+            width: 300px;
             order: 1;
             border-color: silver;
             transform: translateY(60px);
             z-index: 2;
+            background: linear-gradient(145deg, #ffffff, #f8f8f8);
         }
         
         .top-2 .rank-badge {
-            background: linear-gradient(45deg, silver, #c0c0c0);
+            background: linear-gradient(45deg, silver, #e0e0e0);
             color: #555;
             font-weight: bold;
         }
         
         .top-3 {
-            width: 280px;
+            width: 300px;
             order: 3;
             border-color: #cd7f32;
             transform: translateY(60px);
             z-index: 2;
+            background: linear-gradient(145deg, #ffffff, #f8f8f8);
         }
         
         .top-3 .rank-badge {
-            background: linear-gradient(45deg, #cd7f32, #b87333);
+            background: linear-gradient(45deg, #cd7f32, #e3964f);
             color: white;
             font-weight: bold;
         }
@@ -141,52 +249,68 @@
             position: absolute;
             top: 15px;
             left: 15px;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            font-size: 1.4rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            font-weight: 800;
+            border: 3px solid white;
         }
         
         .item-image {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            background-color: #f8f8f8;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-blue));
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ccc;
-            font-size: 3rem;
+            font-size: 4rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .item-image:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
         }
         
         .item-title {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             color: var(--accent-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 600;
+            line-height: 1.3;
         }
         
         .item-description {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #777;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            line-height: 1.6;
+            margin-bottom: 25px;
             min-height: 60px;
         }
         
         .item-actions {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-top: 15px;
         }
         
@@ -194,24 +318,26 @@
             background: var(--primary-color);
             color: white;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 10px rgba(255, 126, 185, 0.3);
         }
         
         .action-btn:hover {
             background: var(--accent-color);
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 15px rgba(255, 101, 163, 0.4);
         }
         
         .edit-btn {
-            background: #7afcff;
+            background: var(--secondary-color);
             color: #555;
         }
         
@@ -219,50 +345,81 @@
             background: #ff7eb3;
         }
         
+        /* Các mục khác */
         .other-items {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 15px 35px var(--shadow-color);
             margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .other-items:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
         
         .other-items h2 {
             color: var(--accent-color);
-            margin-bottom: 25px;
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
             border-bottom: 3px dashed var(--secondary-color);
-            font-size: 1.8rem;
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .items-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
         
         .list-item {
-            background: #f9f9f9;
-            border-radius: 15px;
-            padding: 20px;
+            background: linear-gradient(145deg, #f9f9f9, #ffffff);
+            border-radius: 20px;
+            padding: 22px;
             display: flex;
             align-items: center;
             transition: all 0.3s;
-            border-left: 5px solid var(--primary-color);
+            border-left: 6px solid var(--primary-color);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .list-item:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
         }
         
         .list-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transform: translateX(8px) translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 101, 163, 0.15);
         }
         
         .list-rank {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--primary-color);
-            margin-right: 15px;
-            min-width: 40px;
+            margin-right: 20px;
+            min-width: 45px;
             text-align: center;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
         }
         
         .list-content {
@@ -271,33 +428,52 @@
         
         .list-content h3 {
             color: #555;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
         
         .list-content p {
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
+        /* Form thêm mục */
         .add-form-container {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 15px 35px var(--shadow-color);
             margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-form-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
         
         .add-form-container h2 {
             color: var(--accent-color);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .form-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 25px;
+            margin-bottom: 25px;
         }
         
         .form-group {
@@ -307,89 +483,235 @@
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #666;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.05rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 12px 15px;
+            padding: 15px 18px;
             border: 2px solid #eee;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: #fafafa;
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 126, 185, 0.1);
         }
         
         .submit-btn {
             background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            box-shadow: 0 10px 20px rgba(255, 126, 185, 0.3);
+            margin-top: 10px;
         }
         
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 126, 179, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(255, 101, 163, 0.4);
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
         }
         
         .upload-area {
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            padding: 25px;
+            border: 3px dashed #ddd;
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            background: #fafafa;
         }
         
         .upload-area:hover {
             border-color: var(--primary-color);
-            background-color: rgba(255, 126, 179, 0.05);
+            background-color: rgba(255, 126, 185, 0.05);
         }
         
         .upload-area i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .upload-text {
             color: #666;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
         
+        /* Nút chia sẻ */
+        .sync-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .sync-btn {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.2);
+        }
+        
+        .sync-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.3);
+        }
+        
+        .share-btn {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+        }
+        
+        .load-btn {
+            background: linear-gradient(45deg, #FF9800, #FFB74D);
+        }
+        
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 1rem;
             margin-top: 30px;
             border-top: 1px solid #eee;
+            animation: fadeInUp 0.8s ease 0.6s both;
         }
         
         .footer-heart {
-            color: var(--accent-color);
+            color: var(--heart-color);
             animation: heartbeat 1.5s infinite;
+            margin: 0 5px;
         }
         
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 500px;
+            padding: 35px;
+            position: relative;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .modal-content:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.8rem;
+            color: #aaa;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            color: #555;
+            background: #f5f5f5;
+        }
+        
+        /* Message đặc biệt */
+        .special-message {
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-yellow));
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px dashed var(--primary-color);
+            animation: pulse 2s infinite;
+            box-shadow: 0 10px 25px rgba(255, 126, 185, 0.1);
+        }
+        
+        .special-message h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .special-message p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Animation */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -411,102 +733,31 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.2);
             }
         }
         
-        @media (max-width: 1100px) {
-            .ranking-container {
-                min-height: auto;
+        @keyframes glow {
+            from {
+                box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
             }
-            
-            .top-2, .top-3 {
-                transform: translateY(0);
-            }
-            
-            .top-1, .top-2, .top-3 {
-                width: 300px;
+            to {
+                box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6);
             }
         }
         
-        @media (max-width: 900px) {
-            .ranking-container {
-                flex-direction: column;
-                align-items: center;
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
             }
-            
-            .top-1, .top-2, .top-3 {
-                order: 0;
-                width: 100%;
-                max-width: 400px;
-                margin-bottom: 30px;
+            50% {
+                opacity: 0.9;
             }
-            
-            .top-1 {
-                animation: none;
-            }
-            
-            .header h1 {
-                font-size: 2.2rem;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .top-item, .other-items, .add-form-container {
-                padding: 20px;
-            }
-            
-            .item-title {
-                font-size: 1.5rem;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .form-group {
-                min-width: 100%;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            .items-list {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
         }
         
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            position: relative;
-            animation: slideUp 0.4s ease;
         }
         
         @keyframes slideUp {
@@ -520,63 +771,142 @@
             }
         }
         
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: #aaa;
-            cursor: pointer;
-            background: none;
-            border: none;
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .ranking-container {
+                min-height: auto;
+            }
+            
+            .top-2, .top-3 {
+                transform: translateY(0);
+            }
+            
+            .top-1, .top-2, .top-3 {
+                width: 320px;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+            }
         }
         
-        .close-modal:hover {
-            color: #555;
+        @media (max-width: 900px) {
+            .ranking-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .top-1, .top-2, .top-3 {
+                order: 0;
+                width: 100%;
+                max-width: 450px;
+                margin-bottom: 30px;
+            }
+            
+            .top-1 {
+                animation: none;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
         }
         
-        /* Nút chia sẻ */
-        .sync-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .top-item, .other-items, .add-form-container, .modal-content {
+                padding: 25px;
+            }
+            
+            .item-title {
+                font-size: 1.7rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .sync-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sync-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
         }
         
-        .sync-btn {
-            background: linear-gradient(45deg, #4CAF50, #8BC34A);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
+        @media (max-width: 400px) {
+            .items-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
         }
         
-        .sync-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        /* Tối ưu cho iOS */
+        @supports (-webkit-touch-callout: none) {
+            .action-btn, .sync-btn, .submit-btn {
+                cursor: default;
+            }
+            
+            .action-btn:active, .sync-btn:active, .submit-btn:active {
+                transform: scale(0.95);
+            }
         }
         
-        .share-btn {
-            background: linear-gradient(45deg, #2196F3, #21CBF3);
-        }
-        
-        .load-btn {
-            background: linear-gradient(45deg, #FF9800, #FFB74D);
+        /* Tối ưu cho Windows */
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            .heart {
+                animation: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Hiệu ứng nền trái tim bay -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
     <div class="container">
         <header class="header">
-            <h1>Những thứ yêu thích của Quế Anh</h1>
-            <p>Một trang web đặc biệt dành tặng người yêu của tôi, nơi lưu giữ những điều đáng yêu nhất ❤️</p>
+            <h1>Những thứ yêu thích của Quế Anh 💖</h1>
+            <p>Một trang web đặc biệt dành tặng người yêu của tôi, nơi lưu giữ những điều đáng yêu nhất</p>
+            
+            <div class="os-badges">
+                <div class="os-badge windows-badge">
+                    <i class="fab fa-windows"></i> Windows
+                </div>
+                <div class="os-badge ios-badge">
+                    <i class="fab fa-apple"></i> iOS
+                </div>
+            </div>
         </header>
+        
+        <!-- Thông điệp đặc biệt -->
+        <div class="special-message">
+            <h3><i class="fas fa-heart"></i> Gửi Quế Anh yêu dấu</h3>
+            <p>Trang web này là minh chứng cho tình yêu anh dành cho em. Mỗi mục yêu thích ở đây đều là những khoảnh khắc anh trân trọng nhất khi ở bên em ❤️</p>
+        </div>
         
         <!-- Nút chia sẻ -->
         <div class="sync-controls">
@@ -585,6 +915,9 @@
             </button>
             <button onclick="importFromLink()" class="sync-btn load-btn">
                 <i class="fas fa-download"></i> Nhập từ link
+            </button>
+            <button onclick="showLoveMessage()" class="sync-btn" style="background: linear-gradient(45deg, #ff4081, #ff79b0);">
+                <i class="fas fa-heart"></i> Tin nhắn yêu thương
             </button>
         </div>
         
@@ -639,6 +972,7 @@
         
         <footer class="footer">
             <p>Made with <span class="footer-heart"><i class="fas fa-heart"></i></span> for Quế Anh | Dữ liệu được lưu trên trình duyệt của bạn</p>
+            <p><small>Được tối ưu hóa cho cả Windows và iOS 💖</small></p>
         </footer>
     </div>
     
@@ -646,7 +980,9 @@
     <div class="modal" id="editModal">
         <div class="modal-content">
             <button class="close-modal" id="closeModal">&times;</button>
-            <h2 style="color: var(--accent-color); margin-bottom: 20px;">Chỉnh sửa mục yêu thích</h2>
+            <h2 style="color: var(--accent-color); margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-edit"></i> Chỉnh sửa mục yêu thích
+            </h2>
             <form id="editItemForm">
                 <div class="form-group">
                     <label for="editItemTitle">Tên mục yêu thích</label>
@@ -675,7 +1011,7 @@
                 
                 <input type="hidden" id="editItemId">
                 
-                <button type="submit" class="submit-btn" style="width: 100%; justify-content: center; margin-top: 10px;">
+                <button type="submit" class="submit-btn" style="width: 100%; justify-content: center; margin-top: 15px;">
                     <i class="fas fa-save"></i> Lưu thay đổi
                 </button>
             </form>
@@ -688,7 +1024,7 @@
             {
                 id: 1,
                 title: "Được ôm Quế Anh từ phía sau",
-                description: "Cảm giác ấm áp và hạnh phúc nhất",
+                description: "Cảm giác ấm áp và hạnh phúc nhất trên đời",
                 rank: 1,
                 image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80"
             },
@@ -709,7 +1045,7 @@
             {
                 id: 4,
                 title: "Đi dạo công viên buổi tối",
-                description: "Trò chuyện và tận hưởng không khí mát mẻ",
+                description: "Trò chuyện và tận hưởng không khí mát mẻ bên nhau",
                 rank: 4,
                 image: ""
             },
@@ -719,13 +1055,50 @@
                 description: "Ôm nhau trên sofa và xem những bộ phim hay",
                 rank: 5,
                 image: ""
+            },
+            {
+                id: 6,
+                title: "Nghe Quế Anh hát",
+                description: "Giọng hát ngọt ngào làm tan biến mọi mệt mỏi",
+                rank: 6,
+                image: ""
             }
         ];
+
+        // Tạo hiệu ứng trái tim bay
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                
+                // Kích thước ngẫu nhiên
+                const size = Math.random() * 25 + 15;
+                heart.style.fontSize = `${size}px`;
+                
+                // Vị trí ngẫu nhiên
+                const startX = Math.random() * 100;
+                heart.style.left = `${startX}%`;
+                
+                // Độ trễ ngẫu nhiên
+                const delay = Math.random() * 15;
+                heart.style.animationDelay = `${delay}s`;
+                
+                // Tốc độ ngẫu nhiên
+                const duration = Math.random() * 10 + 15;
+                heart.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(heart);
+            }
+        }
 
         // Lưu và tải dữ liệu
         function saveToLocalStorage() {
             localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
-            console.log('Đã lưu dữ liệu:', favoriteItems.length, 'mục');
+            console.log('💾 Đã lưu dữ liệu:', favoriteItems.length, 'mục');
         }
 
         function loadFromLocalStorage() {
@@ -733,7 +1106,7 @@
             if (saved) {
                 try {
                     favoriteItems = JSON.parse(saved);
-                    console.log('Đã tải dữ liệu từ localStorage:', favoriteItems.length, 'mục');
+                    console.log('📂 Đã tải dữ liệu từ localStorage:', favoriteItems.length, 'mục');
                 } catch(e) {
                     console.error('Lỗi khi tải dữ liệu:', e);
                 }
@@ -750,23 +1123,31 @@
                     const data = JSON.parse(decoded);
                     favoriteItems = data.items;
                     saveToLocalStorage();
-                    alert(`✅ Đã nhập ${data.items.length} mục từ ${data.from || 'link chia sẻ'}`);
+                    
+                    // Hiệu ứng thông báo đặc biệt
+                    showNotification(`💖 Đã nhập ${data.items.length} mục từ ${data.from || 'link chia sẻ'}`, 'success');
+                    
                     // Xóa param khỏi URL
                     window.history.replaceState({}, document.title, window.location.pathname);
                 } catch(e) {
                     console.error('Lỗi khi nhập từ link:', e);
-                    alert('❌ Link không hợp lệ hoặc đã hết hạn');
+                    showNotification('❌ Link không hợp lệ hoặc đã hết hạn', 'error');
                 }
             }
         }
 
         // Khởi tạo trang
         document.addEventListener('DOMContentLoaded', function() {
+            createFloatingHearts();
             loadFromLocalStorage();
             loadFromURL();
             renderAllItems();
             setupEventListeners();
-            console.log('Trang web đã sẵn sàng!');
+            
+            // Thông báo chào mừng
+            setTimeout(() => {
+                console.log('💕 Trang web dành tặng Quế Anh đã sẵn sàng!');
+            }, 1000);
         });
 
         // Render tất cả các mục
@@ -796,20 +1177,20 @@
                     <div class="rank-badge" style="background: ${rankColors[i]}">${i+1}</div>
                     <div class="item-image">
                         ${item.image ? 
-                            `<img src="${item.image}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover; border-radius:15px;">` : 
-                            `<i class="fas fa-heart" style="color:#ffcce0;"></i>`
+                            `<img src="${item.image}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">` : 
+                            `<i class="fas fa-heart" style="color:#ffcce0; font-size: 5rem;"></i>`
                         }
                     </div>
                     <h3 class="item-title">${item.title}</h3>
                     <p class="item-description">${item.description}</p>
                     <div class="item-actions">
-                        <button class="action-btn edit-btn" data-id="${item.id}">
+                        <button class="action-btn edit-btn" data-id="${item.id}" title="Chỉnh sửa">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="action-btn delete-btn" data-id="${item.id}">
+                        <button class="action-btn delete-btn" data-id="${item.id}" title="Xóa">
                             <i class="fas fa-trash"></i>
                         </button>
-                        <button class="action-btn" onclick="toggleFavorite(${item.id})">
+                        <button class="action-btn" onclick="sendLove(${item.id})" title="Gửi yêu thương">
                             <i class="fas fa-heart"></i>
                         </button>
                     </div>
@@ -842,7 +1223,12 @@
             const otherItems = favoriteItems.slice(3);
             
             if (otherItems.length === 0) {
-                itemsList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888; padding: 20px;">Chưa có mục nào khác. Hãy thêm mới!</p>';
+                itemsList.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px;">
+                        <i class="fas fa-heart" style="font-size: 3rem; color: #ffcce0; margin-bottom: 15px;"></i>
+                        <p style="color: #888; font-size: 1.2rem;">Chưa có mục nào khác. Hãy thêm mục yêu thích mới!</p>
+                    </div>
+                `;
                 return;
             }
             
@@ -858,10 +1244,10 @@
                         <p>${item.description}</p>
                     </div>
                     <div class="item-actions">
-                        <button class="action-btn edit-btn" data-id="${item.id}">
+                        <button class="action-btn edit-btn" data-id="${item.id}" title="Chỉnh sửa">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="action-btn delete-btn" data-id="${item.id}">
+                        <button class="action-btn delete-btn" data-id="${item.id}" title="Xóa">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -899,7 +1285,7 @@
             // Copy vào clipboard
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(link).then(() => {
-                    alert('✅ Đã copy link chia sẻ vào clipboard!\n\nGửi link này cho người yêu để đồng bộ dữ liệu.');
+                    showNotification('✅ Đã copy link chia sẻ vào clipboard! Gửi link này cho người yêu để đồng bộ dữ liệu.', 'success');
                 }).catch(err => {
                     prompt('📋 Copy link này và gửi cho người yêu:', link);
                 });
@@ -911,7 +1297,7 @@
 
         // Nhập từ link
         function importFromLink() {
-            const link = prompt('Dán link chia sẻ bạn nhận được:');
+            const link = prompt('Dán link chia sẻ bạn nhận được:', '');
             if (!link) return;
             
             try {
@@ -926,11 +1312,256 @@
                     favoriteItems = data.items;
                     saveToLocalStorage();
                     renderAllItems();
-                    alert(`✅ Đã nhập thành công ${data.items.length} mục!`);
+                    showNotification(`✅ Đã nhập thành công ${data.items.length} mục!`, 'success');
+                    
+                    // Hiệu ứng vui
+                    createConfetti();
                 }
             } catch(e) {
-                alert('❌ Link không hợp lệ hoặc đã hết hạn');
+                showNotification('❌ Link không hợp lệ hoặc đã hết hạn', 'error');
                 console.error('Lỗi nhập từ link:', e);
+            }
+        }
+
+        // Hiển thị tin nhắn yêu thương
+        function showLoveMessage() {
+            const messages = [
+                "Anh yêu em nhiều hơn những gì có thể diễn tả bằng lời 💖",
+                "Mỗi ngày bên em là một ngày hạnh phúc với anh 😊",
+                "Em là điều tuyệt vời nhất đã xảy đến với cuộc đời anh ❤️",
+                "Cảm ơn em vì đã là chính em, và vì đã yêu anh 🥰",
+                "Anh không thể đợi để tạo thêm nhiều kỷ niệm đẹp bên em 🌟"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Tạo thông báo đẹp
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #ff7eb9, #ff65a3);
+                color: white;
+                padding: 25px 35px;
+                border-radius: 20px;
+                box-shadow: 0 15px 35px rgba(255, 101, 163, 0.4);
+                z-index: 1001;
+                text-align: center;
+                max-width: 80%;
+                animation: fadeIn 0.5s ease;
+                font-size: 1.3rem;
+                line-height: 1.5;
+                border: 3px solid white;
+            `;
+            
+            messageDiv.innerHTML = `
+                <i class="fas fa-heart" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                <div>${randomMessage}</div>
+                <button onclick="this.parentElement.remove()" style="margin-top: 20px; background: white; color: #ff65a3; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer;">Đóng</button>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Tự động đóng sau 5 giây
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Gửi yêu thương cho một mục
+        function sendLove(id) {
+            const item = favoriteItems.find(item => item.id === id);
+            if (!item) return;
+            
+            // Hiệu ứng trái tim
+            createHeartAnimation();
+            
+            // Thông báo
+            showNotification(`💖 Đã gửi yêu thương đến "${item.title}"`, 'success');
+            
+            // Phát âm thanh nếu có
+            playLoveSound();
+        }
+
+        // Tạo hiệu ứng trái tim bay lên
+        function createHeartAnimation() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 2rem;
+                color: var(--heart-color);
+                z-index: 1000;
+                animation: floatUp 2s ease-in-out forwards;
+            `;
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+
+        // Tạo hiệu ứng confetti
+        function createConfetti() {
+            const colors = ['#ff7eb9', '#a6e3ff', '#ffd700', '#7afcff', '#ff65a3'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    top: -10px;
+                    left: ${Math.random() * 100}vw;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    z-index: 1000;
+                    animation: fall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+            
+            // Thêm CSS cho animation rơi
+            if (!document.querySelector('#confetti-style')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-style';
+                style.innerHTML = `
+                    @keyframes fall {
+                        to {
+                            transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Hiển thị thông báo đẹp
+        function showNotification(message, type = 'info') {
+            // Kiểm tra nếu đã có thông báo thì xóa
+            const existingNotification = document.querySelector('.custom-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'custom-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(45deg, #4CAF50, #8BC34A)' : 
+                          type === 'error' ? 'linear-gradient(45deg, #f44336, #ff7961)' : 
+                          'linear-gradient(45deg, #2196F3, #21CBF3)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                z-index: 1001;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                animation: slideInRight 0.3s ease;
+                max-width: 400px;
+                font-weight: 500;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                 type === 'error' ? 'exclamation-circle' : 
+                                 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Tự động đóng sau 3 giây
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+            
+            // Thêm CSS cho animation nếu chưa có
+            if (!document.querySelector('#notification-style')) {
+                const style = document.createElement('style');
+                style.id = 'notification-style';
+                style.innerHTML = `
+                    @keyframes slideInRight {
+                        from {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+                    @keyframes slideOutRight {
+                        from {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                        to {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                    }
+                    @keyframes floatUp {
+                        0% {
+                            transform: translate(-50%, 0);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translate(-50%, -100vh);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Phát âm thanh yêu thương
+        function playLoveSound() {
+            // Tạo âm thanh đơn giản bằng Web Audio API
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // Note C5
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // Note E5
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // Note G5
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                console.log("Không thể phát âm thanh:", e);
             }
         }
 
@@ -949,7 +1580,7 @@
                 // Kiểm tra rank
                 const existingRank = favoriteItems.find(item => item.rank === rank);
                 if (existingRank) {
-                    alert(`⚠️ Hạng ${rank} đã có mục "${existingRank.title}". Vui lòng chọn hạng khác.`);
+                    showNotification(`⚠️ Hạng ${rank} đã có mục "${existingRank.title}". Vui lòng chọn hạng khác.`, 'error');
                     return;
                 }
                 
@@ -978,10 +1609,15 @@
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Đã thêm thành công!';
                 submitBtn.style.background = 'linear-gradient(45deg, #4CAF50, #8BC34A)';
                 
+                // Hiệu ứng confetti
+                createConfetti();
+                
                 setTimeout(() => {
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.background = 'linear-gradient(45deg, var(--primary-color), var(--accent-color))';
                 }, 2000);
+                
+                showNotification(`✅ Đã thêm "${title}" vào danh sách yêu thích!`, 'success');
             });
             
             // Upload ảnh
@@ -996,9 +1632,9 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         imagePreview.innerHTML = `
-                            <div style="margin-top: 10px; position: relative; display: inline-block;">
-                                <img src="${e.target.result}" alt="Preview" style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: -5px; right: -5px; background: #ff7eb3; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer;">×</button>
+                            <div style="margin-top: 15px; position: relative; display: inline-block;">
+                                <img src="${e.target.result}" alt="Preview" style="width: 180px; height: 120px; object-fit: cover; border-radius: 15px; border: 3px solid #ff7eb9;">
+                                <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: -10px; right: -10px; background: #ff7eb3; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);">×</button>
                             </div>
                         `;
                     };
@@ -1010,7 +1646,7 @@
             uploadArea.addEventListener('dragover', function(e) {
                 e.preventDefault();
                 this.style.borderColor = 'var(--primary-color)';
-                this.style.backgroundColor = 'rgba(255, 126, 179, 0.1)';
+                this.style.backgroundColor = 'rgba(255, 126, 185, 0.1)';
             });
             
             uploadArea.addEventListener('dragleave', function() {
@@ -1026,6 +1662,7 @@
                 if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                     imageUpload.files = e.dataTransfer.files;
                     imageUpload.dispatchEvent(new Event('change'));
+                    showNotification('✅ Đã tải ảnh lên thành công!', 'success');
                 }
             });
             
@@ -1057,7 +1694,7 @@
                 if (itemIndex !== -1) {
                     const existingItem = favoriteItems.find(item => item.rank === rank && item.id !== id);
                     if (existingItem) {
-                        alert(`⚠️ Hạng ${rank} đã có mục "${existingItem.title}". Vui lòng chọn hạng khác.`);
+                        showNotification(`⚠️ Hạng ${rank} đã có mục "${existingItem.title}". Vui lòng chọn hạng khác.`, 'error');
                         return;
                     }
                     
@@ -1072,7 +1709,7 @@
                     saveToLocalStorage();
                     renderAllItems();
                     editModal.style.display = 'none';
-                    alert('✅ Đã cập nhật thành công!');
+                    showNotification('✅ Đã cập nhật thành công!', 'success');
                 }
             });
             
@@ -1087,9 +1724,9 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         editImagePreview.innerHTML = `
-                            <div style="margin-top: 10px; position: relative; display: inline-block;">
-                                <img src="${e.target.result}" alt="Preview" style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                                <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: -5px; right: -5px; background: #ff7eb3; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer;">×</button>
+                            <div style="margin-top: 15px; position: relative; display: inline-block;">
+                                <img src="${e.target.result}" alt="Preview" style="width: 180px; height: 120px; object-fit: cover; border-radius: 15px; border: 3px solid #ff7eb9;">
+                                <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: -10px; right: -10px; background: #ff7eb3; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);">×</button>
                             </div>
                         `;
                     };
@@ -1113,9 +1750,9 @@
             
             if (item.image) {
                 editImagePreview.innerHTML = `
-                    <div style="margin-top: 10px; position: relative; display: inline-block;">
-                        <img src="${item.image}" alt="Preview" style="width: 150px; height: 100px; object-fit: cover; border-radius: 10px;">
-                        <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: -5px; right: -5px; background: #ff7eb3; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer;">×</button>
+                    <div style="margin-top: 15px; position: relative; display: inline-block;">
+                        <img src="${item.image}" alt="Preview" style="width: 180px; height: 120px; object-fit: cover; border-radius: 15px; border: 3px solid #ff7eb9;">
+                        <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: -10px; right: -10px; background: #ff7eb3; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);">×</button>
                     </div>
                 `;
             }
@@ -1125,17 +1762,15 @@
 
         // Xóa mục
         function deleteItem(id) {
-            if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
+            const item = favoriteItems.find(item => item.id === id);
+            if (!item) return;
+            
+            if (confirm(`Bạn có chắc chắn muốn xóa mục "${item.title}" không?`)) {
                 favoriteItems = favoriteItems.filter(item => item.id !== id);
                 saveToLocalStorage();
                 renderAllItems();
-                alert('✅ Đã xóa thành công!');
+                showNotification('✅ Đã xóa thành công!', 'success');
             }
-        }
-
-        // Chức năng mẫu
-        function toggleFavorite(id) {
-            alert('💖 Đã thêm vào mục yêu thích đặc biệt!');
         }
     </script>
 </body>
