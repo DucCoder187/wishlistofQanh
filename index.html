@@ -33,7 +33,6 @@
             margin: 0 auto;
         }
         
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 40px;
@@ -69,7 +68,6 @@
             margin: 0 auto;
         }
         
-        /* Ranking Area */
         .ranking-container {
             display: flex;
             justify-content: center;
@@ -97,7 +95,6 @@
             transform: translateY(-10px);
         }
         
-        /* Top 1 */
         .top-1 {
             width: 320px;
             order: 2;
@@ -112,7 +109,6 @@
             font-weight: bold;
         }
         
-        /* Top 2 */
         .top-2 {
             width: 280px;
             order: 1;
@@ -127,7 +123,6 @@
             font-weight: bold;
         }
         
-        /* Top 3 */
         .top-3 {
             width: 280px;
             order: 3;
@@ -224,7 +219,6 @@
             background: #ff7eb3;
         }
         
-        /* Other Items List */
         .other-items {
             background: white;
             border-radius: 20px;
@@ -285,7 +279,6 @@
             font-size: 0.9rem;
         }
         
-        /* Add Item Form */
         .add-form-container {
             background: white;
             border-radius: 20px;
@@ -379,7 +372,6 @@
             font-size: 1rem;
         }
         
-        /* Footer */
         .footer {
             text-align: center;
             padding: 20px;
@@ -394,7 +386,6 @@
             animation: heartbeat 1.5s infinite;
         }
         
-        /* Animations */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -424,7 +415,6 @@
             }
         }
         
-        /* Responsive Design */
         @media (max-width: 1100px) {
             .ranking-container {
                 min-height: auto;
@@ -490,7 +480,6 @@
             }
         }
         
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -545,28 +534,70 @@
         .close-modal:hover {
             color: #555;
         }
+        
+        /* Nút chia sẻ */
+        .sync-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .sync-btn {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sync-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .share-btn {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+        }
+        
+        .load-btn {
+            background: linear-gradient(45deg, #FF9800, #FFB74D);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <h1>Những thứ yêu thích của Quế Anh</h1>
             <p>Một trang web đặc biệt dành tặng người yêu của tôi, nơi lưu giữ những điều đáng yêu nhất ❤️</p>
         </header>
         
+        <!-- Nút chia sẻ -->
+        <div class="sync-controls">
+            <button onclick="generateShareLink()" class="sync-btn share-btn">
+                <i class="fas fa-share-alt"></i> Tạo link chia sẻ
+            </button>
+            <button onclick="importFromLink()" class="sync-btn load-btn">
+                <i class="fas fa-download"></i> Nhập từ link
+            </button>
+        </div>
+        
         <!-- Ranking Area -->
-        <section class="ranking-container">
-            <!-- Top 1 - Rendered by JavaScript -->
-            <!-- Top 2 - Rendered by JavaScript -->
-            <!-- Top 3 - Rendered by JavaScript -->
+        <section class="ranking-container" id="rankingContainer">
+            <!-- Top items sẽ được tạo bằng JavaScript -->
         </section>
         
         <!-- Other Items List -->
         <section class="other-items">
             <h2><i class="fas fa-star"></i> Danh sách những thứ yêu thích khác</h2>
-            <div class="items-list">
-                <!-- Other items rendered by JavaScript -->
+            <div class="items-list" id="itemsList">
+                <!-- Other items sẽ được tạo bằng JavaScript -->
             </div>
         </section>
         
@@ -606,9 +637,8 @@
             </form>
         </section>
         
-        <!-- Footer -->
         <footer class="footer">
-            <p>Made with <span class="footer-heart"><i class="fas fa-heart"></i></span> for Quế Anh | Trang web này có thể chỉnh sửa và lưu trực tiếp trên trình duyệt</p>
+            <p>Made with <span class="footer-heart"><i class="fas fa-heart"></i></span> for Quế Anh | Dữ liệu được lưu trên trình duyệt của bạn</p>
         </footer>
     </div>
     
@@ -653,28 +683,28 @@
     </div>
 
     <script>
-        // Mẫu dữ liệu ban đầu
+        // Dữ liệu mẫu
         let favoriteItems = [
             {
                 id: 1,
                 title: "Được ôm Quế Anh từ phía sau",
                 description: "Cảm giác ấm áp và hạnh phúc nhất",
                 rank: 1,
-                image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80"
             },
             {
                 id: 2,
                 title: "Nhìn thấy nụ cười của Quế Anh",
                 description: "Nụ cười tỏa nắng làm tan chảy trái tim",
                 rank: 2,
-                image: "https://images.unsplash.com/photo-1519281682544-5f37c4b14c47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                image: "https://images.unsplash.com/photo-1519281682544-5f37c4b14c47?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
             },
             {
                 id: 3,
                 title: "Nấu ăn cùng nhau",
                 description: "Những bữa ăn tự nấu đầy yêu thương",
                 rank: 3,
-                image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
             },
             {
                 id: 4,
@@ -689,94 +719,73 @@
                 description: "Ôm nhau trên sofa và xem những bộ phim hay",
                 rank: 5,
                 image: ""
-            },
-            {
-                id: 6,
-                title: "Nghe Quế Anh hát",
-                description: "Giọng hát ngọt ngào như thiên thần",
-                rank: 6,
-                image: ""
-            },
-            {
-                id: 7,
-                title: "Những tin nhắn chúc ngủ ngon",
-                description: "Luôn là điều đẹp nhất để kết thúc một ngày",
-                rank: 7,
-                image: ""
-            },
-            {
-                id: 8,
-                title: "Cái ôm sau một ngày mệt mỏi",
-                description: "Xua tan mọi căng thẳng và mệt nhọc",
-                rank: 8,
-                image: ""
-            },
-            {
-                id: 9,
-                title: "Nắm tay nhau đi bộ",
-                description: "Cảm giác được gần nhau dù ở bất cứ đâu",
-                rank: 9,
-                image: ""
-            },
-            {
-                id: 10,
-                title: "Những món quà bất ngờ",
-                description: "Dù nhỏ nhưng chứa đựng cả tấm lòng",
-                rank: 10,
-                image: ""
             }
         ];
 
-        // Lưu và tải dữ liệu từ localStorage
+        // Lưu và tải dữ liệu
         function saveToLocalStorage() {
             localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
+            console.log('Đã lưu dữ liệu:', favoriteItems.length, 'mục');
         }
 
         function loadFromLocalStorage() {
             const saved = localStorage.getItem('favoriteItems');
             if (saved) {
-                favoriteItems = JSON.parse(saved);
+                try {
+                    favoriteItems = JSON.parse(saved);
+                    console.log('Đã tải dữ liệu từ localStorage:', favoriteItems.length, 'mục');
+                } catch(e) {
+                    console.error('Lỗi khi tải dữ liệu:', e);
+                }
+            }
+        }
+
+        // Tải dữ liệu từ URL nếu có
+        function loadFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const shared = urlParams.get('shared');
+            if (shared) {
+                try {
+                    const decoded = atob(shared);
+                    const data = JSON.parse(decoded);
+                    favoriteItems = data.items;
+                    saveToLocalStorage();
+                    alert(`✅ Đã nhập ${data.items.length} mục từ ${data.from || 'link chia sẻ'}`);
+                    // Xóa param khỏi URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                } catch(e) {
+                    console.error('Lỗi khi nhập từ link:', e);
+                    alert('❌ Link không hợp lệ hoặc đã hết hạn');
+                }
             }
         }
 
         // Khởi tạo trang
         document.addEventListener('DOMContentLoaded', function() {
             loadFromLocalStorage();
+            loadFromURL();
             renderAllItems();
             setupEventListeners();
+            console.log('Trang web đã sẵn sàng!');
         });
 
         // Render tất cả các mục
         function renderAllItems() {
-            // Sắp xếp theo rank
             favoriteItems.sort((a, b) => a.rank - b.rank);
-            
-            // Render top 3
             renderTopItems();
-            
-            // Render các mục còn lại
             renderOtherItems();
         }
 
         // Render top 3 items
         function renderTopItems() {
-            const rankingContainer = document.querySelector('.ranking-container');
+            const rankingContainer = document.getElementById('rankingContainer');
             rankingContainer.innerHTML = '';
             
-            // Lấy top 3
             const topItems = favoriteItems.slice(0, 3);
             
-            // Đảm bảo đủ 3 items
             for (let i = 0; i < 3; i++) {
-                if (!topItems[i]) {
-                    topItems[i] = { id: 0, title: "Chưa có", description: "Đang chờ thêm...", rank: i+1, image: "" };
-                }
-            }
-            
-            // Tạo HTML cho top items
-            topItems.forEach((item, index) => {
-                const rankClass = `top-${index+1}`;
-                const rankNames = ["Nhất", "Nhì", "Ba"];
+                const item = topItems[i] || { id: 0, title: "Chưa có", description: "Đang chờ thêm...", rank: i+1, image: "" };
+                const rankClass = `top-${i+1}`;
                 const rankColors = ["gold", "silver", "#cd7f32"];
                 
                 const itemElement = document.createElement('div');
@@ -784,7 +793,7 @@
                 itemElement.dataset.id = item.id;
                 
                 itemElement.innerHTML = `
-                    <div class="rank-badge" style="background: ${rankColors[index]}">${index+1}</div>
+                    <div class="rank-badge" style="background: ${rankColors[i]}">${i+1}</div>
                     <div class="item-image">
                         ${item.image ? 
                             `<img src="${item.image}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover; border-radius:15px;">` : 
@@ -807,9 +816,9 @@
                 `;
                 
                 rankingContainer.appendChild(itemElement);
-            });
+            }
             
-            // Thêm sự kiện cho các nút edit/delete trong top items
+            // Thêm sự kiện
             document.querySelectorAll('.top-item .edit-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = parseInt(this.dataset.id);
@@ -827,10 +836,9 @@
 
         // Render các mục còn lại
         function renderOtherItems() {
-            const itemsList = document.querySelector('.items-list');
+            const itemsList = document.getElementById('itemsList');
             itemsList.innerHTML = '';
             
-            // Lấy các mục từ rank 4 trở đi
             const otherItems = favoriteItems.slice(3);
             
             if (otherItems.length === 0) {
@@ -862,7 +870,7 @@
                 itemsList.appendChild(itemElement);
             });
             
-            // Thêm sự kiện cho các nút edit/delete
+            // Thêm sự kiện
             document.querySelectorAll('.list-item .edit-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = parseInt(this.dataset.id);
@@ -878,7 +886,55 @@
             });
         }
 
-        // Xử lý form thêm mục mới
+        // Tạo link chia sẻ
+        function generateShareLink() {
+            const data = {
+                items: favoriteItems,
+                timestamp: new Date().toISOString(),
+                from: "Quế Anh"
+            };
+            const encoded = btoa(JSON.stringify(data));
+            const link = `${window.location.origin}${window.location.pathname}?shared=${encoded}`;
+            
+            // Copy vào clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link).then(() => {
+                    alert('✅ Đã copy link chia sẻ vào clipboard!\n\nGửi link này cho người yêu để đồng bộ dữ liệu.');
+                }).catch(err => {
+                    prompt('📋 Copy link này và gửi cho người yêu:', link);
+                });
+            } else {
+                prompt('📋 Copy link này và gửi cho người yêu:', link);
+            }
+            return link;
+        }
+
+        // Nhập từ link
+        function importFromLink() {
+            const link = prompt('Dán link chia sẻ bạn nhận được:');
+            if (!link) return;
+            
+            try {
+                const url = new URL(link);
+                const shared = url.searchParams.get('shared');
+                if (!shared) throw new Error('Link không hợp lệ');
+                
+                const decoded = atob(shared);
+                const data = JSON.parse(decoded);
+                
+                if (confirm(`Bạn có chắc muốn nhập ${data.items.length} mục từ "${data.from || 'link chia sẻ'}"? Dữ liệu hiện tại sẽ bị thay thế.`)) {
+                    favoriteItems = data.items;
+                    saveToLocalStorage();
+                    renderAllItems();
+                    alert(`✅ Đã nhập thành công ${data.items.length} mục!`);
+                }
+            } catch(e) {
+                alert('❌ Link không hợp lệ hoặc đã hết hạn');
+                console.error('Lỗi nhập từ link:', e);
+            }
+        }
+
+        // Các hàm xử lý sự kiện
         function setupEventListeners() {
             // Form thêm mục mới
             const addForm = document.getElementById('addItemForm');
@@ -890,10 +946,10 @@
                 const description = document.getElementById('itemDescription').value;
                 const image = document.getElementById('imagePreview').querySelector('img')?.src || '';
                 
-                // Kiểm tra rank đã tồn tại chưa
+                // Kiểm tra rank
                 const existingRank = favoriteItems.find(item => item.rank === rank);
                 if (existingRank) {
-                    alert(`Hạng ${rank} đã có mục "${existingRank.title}". Vui lòng chọn hạng khác hoặc chỉnh sửa mục hiện có.`);
+                    alert(`⚠️ Hạng ${rank} đã có mục "${existingRank.title}". Vui lòng chọn hạng khác.`);
                     return;
                 }
                 
@@ -909,7 +965,6 @@
                     image
                 });
                 
-                // Lưu và render lại
                 saveToLocalStorage();
                 renderAllItems();
                 
@@ -917,7 +972,7 @@
                 addForm.reset();
                 document.getElementById('imagePreview').innerHTML = '';
                 
-                // Hiệu ứng thông báo
+                // Hiệu ứng
                 const submitBtn = addForm.querySelector('.submit-btn');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Đã thêm thành công!';
@@ -929,7 +984,7 @@
                 }, 2000);
             });
             
-            // Upload ảnh cho form thêm mới
+            // Upload ảnh
             const uploadArea = document.getElementById('uploadArea');
             const imageUpload = document.getElementById('imageUpload');
             const imagePreview = document.getElementById('imagePreview');
@@ -939,7 +994,6 @@
             imageUpload.addEventListener('change', function() {
                 if (this.files && this.files[0]) {
                     const reader = new FileReader();
-                    
                     reader.onload = function(e) {
                         imagePreview.innerHTML = `
                             <div style="margin-top: 10px; position: relative; display: inline-block;">
@@ -948,7 +1002,6 @@
                             </div>
                         `;
                     };
-                    
                     reader.readAsDataURL(this.files[0]);
                 }
             });
@@ -972,8 +1025,7 @@
                 
                 if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                     imageUpload.files = e.dataTransfer.files;
-                    const event = new Event('change');
-                    imageUpload.dispatchEvent(event);
+                    imageUpload.dispatchEvent(new Event('change'));
                 }
             });
             
@@ -1001,13 +1053,11 @@
                 const description = document.getElementById('editItemDescription').value;
                 const image = document.getElementById('editImagePreview').querySelector('img')?.src || '';
                 
-                // Tìm và cập nhật item
                 const itemIndex = favoriteItems.findIndex(item => item.id === id);
                 if (itemIndex !== -1) {
-                    // Kiểm tra rank mới có trùng với item khác không
                     const existingItem = favoriteItems.find(item => item.rank === rank && item.id !== id);
                     if (existingItem) {
-                        alert(`Hạng ${rank} đã có mục "${existingItem.title}". Vui lòng chọn hạng khác.`);
+                        alert(`⚠️ Hạng ${rank} đã có mục "${existingItem.title}". Vui lòng chọn hạng khác.`);
                         return;
                     }
                     
@@ -1021,11 +1071,8 @@
                     
                     saveToLocalStorage();
                     renderAllItems();
-                    
                     editModal.style.display = 'none';
-                    
-                    // Hiệu ứng thông báo
-                    alert('Đã cập nhật thành công!');
+                    alert('✅ Đã cập nhật thành công!');
                 }
             });
             
@@ -1035,11 +1082,9 @@
             const editImagePreview = document.getElementById('editImagePreview');
             
             editUploadArea.addEventListener('click', () => editImageUpload.click());
-            
             editImageUpload.addEventListener('change', function() {
                 if (this.files && this.files[0]) {
                     const reader = new FileReader();
-                    
                     reader.onload = function(e) {
                         editImagePreview.innerHTML = `
                             <div style="margin-top: 10px; position: relative; display: inline-block;">
@@ -1048,7 +1093,6 @@
                             </div>
                         `;
                     };
-                    
                     reader.readAsDataURL(this.files[0]);
                 }
             });
@@ -1064,7 +1108,6 @@
             document.getElementById('editItemRank').value = item.rank;
             document.getElementById('editItemDescription').value = item.description;
             
-            // Xử lý ảnh preview
             const editImagePreview = document.getElementById('editImagePreview');
             editImagePreview.innerHTML = '';
             
@@ -1086,18 +1129,14 @@
                 favoriteItems = favoriteItems.filter(item => item.id !== id);
                 saveToLocalStorage();
                 renderAllItems();
+                alert('✅ Đã xóa thành công!');
             }
         }
 
-        // Chuyển đổi trạng thái yêu thích (chức năng mẫu)
+        // Chức năng mẫu
         function toggleFavorite(id) {
-            alert(`Đã thêm vào mục yêu thích đặc biệt!`);
+            alert('💖 Đã thêm vào mục yêu thích đặc biệt!');
         }
-
-        // Cho phép truy cập từ console (để test)
-        window.favoriteItems = favoriteItems;
-        window.saveToLocalStorage = saveToLocalStorage;
-        window.renderAllItems = renderAllItems;
     </script>
 </body>
 </html>
