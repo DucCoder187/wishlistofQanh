@@ -55,6 +55,47 @@
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23f9c5d1" opacity="0.2" d="M50,85 C70,70 85,55 85,35 C85,20 70,10 50,10 C30,10 15,20 15,35 C15,55 30,70 50,85 Z"/></svg>');
             background-size: 150px;
         }
+        /* Hiệu ứng bay biểu tượng */
+        .floating-icon {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            font-size: 1.5rem;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+        
+        @keyframes floatUpLeft {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) translateX(-50px) scale(0.5);
+            }
+        }
+        
+        @keyframes floatUpRight {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) translateX(50px) scale(0.5);
+            }
+        }
     </style>
 </head>
 <body class="p-4 md:p-10 bg-heart-pattern">
@@ -105,10 +146,10 @@
             <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 shadow-xl inline-block">
                 <p class="text-gray-700 mb-4">Anh mà đéo được On Top thì đừng trách anh tàn nhẫn 💫</p>
                 <div class="flex justify-center space-x-6 text-2xl text-pink-500">
-                    <i class="fas fa-heart hover:scale-125 transition-transform"></i>
-                    <i class="fas fa-star hover:scale-125 transition-transform"></i>
-                    <i class="fas fa-gem hover:scale-125 transition-transform"></i>
-                    <i class="fas fa-crown hover:scale-125 transition-transform"></i>
+                    <i class="fas fa-heart hover:scale-125 transition-transform cursor-pointer icon-clickable" data-icon="heart"></i>
+                    <i class="fas fa-star hover:scale-125 transition-transform cursor-pointer icon-clickable" data-icon="star"></i>
+                    <i class="fas fa-gem hover:scale-125 transition-transform cursor-pointer icon-clickable" data-icon="gem"></i>
+                    <i class="fas fa-crown hover:scale-125 transition-transform cursor-pointer icon-clickable" data-icon="crown"></i>
                 </div>
                 <p class="text-gray-500 text-sm mt-6">Made with <i class="fas fa-heart text-red-500"></i> for Quế Anh</p>
             </div>
@@ -150,6 +191,85 @@
             document.head.appendChild(style);
         }
 
+        // Hàm tạo hiệu ứng bay biểu tượng
+        function createFloatingIcons(iconType, event) {
+            const icons = {
+                'heart': '❤️',
+                'star': '⭐',
+                'gem': '💎',
+                'crown': '👑'
+            };
+            
+            const iconChar = icons[iconType] || '✨';
+            const iconClass = iconType;
+            const colors = {
+                'heart': '#ef4444',
+                'star': '#fbbf24',
+                'gem': '#3b82f6',
+                'crown': '#8b5cf6'
+            };
+            
+            // Tạo 15-20 biểu tượng bay lên
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const floatingIcon = document.createElement('div');
+                    floatingIcon.className = 'floating-icon';
+                    floatingIcon.innerHTML = iconChar;
+                    floatingIcon.style.color = colors[iconType] || '#f472b6';
+                    floatingIcon.style.left = (event.clientX + (Math.random() * 60 - 30)) + 'px';
+                    floatingIcon.style.top = (event.clientY + (Math.random() * 60 - 30)) + 'px';
+                    floatingIcon.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    
+                    document.body.appendChild(floatingIcon);
+                    
+                    // Chọn animation ngẫu nhiên
+                    const animations = ['floatUp', 'floatUpLeft', 'floatUpRight'];
+                    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                    
+                    // Thực hiện animation
+                    floatingIcon.animate([
+                        { 
+                            opacity: 1,
+                            transform: 'translateY(0) scale(1)' 
+                        },
+                        { 
+                            opacity: 0,
+                            transform: `translateY(${Math.random() * -80 - 50}px) translateX(${Math.random() * 100 - 50}px) scale(0.3)`
+                        }
+                    ], {
+                        duration: 800 + Math.random() * 700,
+                        easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                    }).onfinish = () => {
+                        floatingIcon.remove();
+                    };
+                    
+                }, i * 30); // Stagger các biểu tượng
+            }
+            
+            // Hiệu ứng phát ra âm thanh nhẹ (optional)
+            if (typeof Audio !== 'undefined') {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 800 + Math.random() * 400;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                } catch (e) {
+                    console.log("Không thể phát âm thanh");
+                }
+            }
+        }
+
         // Render wishlist function
         function renderWishlist() {
             const list = JSON.parse(localStorage.getItem('queAnhWishlist')) || [];
@@ -184,7 +304,7 @@
                                 <!-- Hình ảnh -->
                                 <div class="relative flex-shrink-0">
                                     <div class="w-24 h-24 rounded-2xl overflow-hidden border-4 border-white shadow-lg">
-                                        <img src=hehe.GIF>
+                                        <img src="${item.image || 'hehe.gif'}" 
                                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                              alt="${item.name}">
                                     </div>
@@ -264,6 +384,21 @@
         document.addEventListener('DOMContentLoaded', () => {
             createSparkles();
             renderWishlist();
+            
+            // Thêm sự kiện click cho các biểu tượng
+            document.querySelectorAll('.icon-clickable').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    const iconType = this.getAttribute('data-icon');
+                    createFloatingIcons(iconType, e);
+                    
+                    // Hiệu ứng nhấp nháy cho icon được click
+                    this.style.transform = 'scale(1.5)';
+                    this.style.transition = 'transform 0.2s';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1.25)';
+                    }, 200);
+                });
+            });
             
             // Add CSS for card animation
             const style = document.createElement('style');
